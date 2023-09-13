@@ -10,7 +10,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
  export function TopPage({title}:Props) {
   return (
     <BackGround>
-      {/* <Ionicons name= "chevron-back"size={30} /> */}
       <Header>{title}</Header>
     </BackGround>
   );
