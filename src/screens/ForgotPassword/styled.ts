@@ -4,22 +4,13 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   width: 100%;
   height: 812px;
-  
 `;
 
 export const Content = styled.View`
   width: 100%;
   height: 400px;
   justify-content: center;
-  /* align-items: center; */
 `;
-
-export const HeaderContainer = styled.View`
-  width: 100%;
-  height: 100px;
-  margin-bottom: 40px;
-`;
-
 export const TouchableTexts = styled.TouchableOpacity``;
 
 export const CreateAccountText = styled.Text`
@@ -33,21 +24,20 @@ export const CreateAccountText = styled.Text`
 `;
 
 export const OutlineContainer = styled.View`
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: flex-start;
   flex-direction: row;
-  height: 30px;
-  margin-right: 20px;
-  margin-bottom: 40px;
+  height: 40px;
+  margin-left: 25px;
+  margin-right: 25px;
+  top: 150px;
 `;
 
 export const OutlineText = styled.Text`
   color: black;
-  text-align: right;
+  text-align: left;
   font-family: Roboto-Regular;
   font-size: 14px;
-  font-weight: 500;
-  margin-right: 10px;
+  font-weight: 700;
 `;
 
 export const BorderContent = styled.View`
@@ -67,7 +57,12 @@ export const BorderTitle = styled.Text`
 `;
 
 export const BorderContainer = styled.View`
-  margin-top: 50px;
+  top: 100px;
   justify-content: center;
   align-items: center;
+`;
+
+export const HeaderContainer = styled.View`
+  width: 100%;
+  height: 100px;
 `;

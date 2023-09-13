@@ -8,6 +8,7 @@ export const HoshiInput = styled(Hoshi).attrs(() => ({
 }))`
   border-color: white;
   width: 343px;
+  justify-content: space-between;
   height: 64px;
   background-color: white;
   border-radius: 4px;

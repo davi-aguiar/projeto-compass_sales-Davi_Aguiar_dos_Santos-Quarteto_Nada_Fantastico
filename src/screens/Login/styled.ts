@@ -23,6 +23,15 @@ export const CreateAccountText = styled.Text`
   bottom: 100px;
 `;
 
+export const OutlineContainer = styled.View`
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  height: 30px;
+  margin-right: 20px;
+  margin-bottom: 32px;
+`;
+
 export const OutlineText = styled.Text`
   color: black;
   text-align: right;
@@ -52,4 +61,9 @@ export const BorderContainer = styled.View`
   top: 100px;
   justify-content: center;
   align-items: center;
+`;
+
+export const HeaderContainer = styled.View`
+  width: 100%;
+  height: 100px;
 `;

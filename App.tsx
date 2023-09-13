@@ -9,9 +9,10 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import Login from './src/screens/Login';
 import SignUp from '@screens/SignUp';
+import ForgotPassword from '@screens/ForgotPassword'
 
 function App() {
-  return <SignUp />;
+  return <ForgotPassword/>;
 }
 
 export default App;

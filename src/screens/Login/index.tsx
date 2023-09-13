@@ -13,34 +13,36 @@ import {
   OutlineText,
   BorderContainer,
   TouchableTexts,
-  CreateAccountText
-} from './style';
+  HeaderContainer,
+  OutlineContainer,
+} from './styled';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default function Login() {
   return (
     <>
+      <HeaderContainer >
       <TopPage title="Login" />
+      </HeaderContainer>
       <Container>
         <Content>
           <Input label="Email" keyboardType="email-address" />
           <Input label="Password" secureTextEntry />
-
+        <OutlineContainer>
           <TouchableTexts>
             <OutlineText>
-              Forgot you Password?
+              Forgot your password?
               <Ionicons name="arrow-forward-sharp" size={13} color="#ff0000" />
             </OutlineText>
           </TouchableTexts>
+          </OutlineContainer>
         </Content>
+
         <ButtonPage title="LOGIN" />
-        <TouchableTexts>
-          <CreateAccountText> Don't have an account? Register here</CreateAccountText>
-        </TouchableTexts>
 
         <BorderContainer>
-          <BorderTitle> Or login with social account</BorderTitle>
+          <BorderTitle> Or sign up with social account</BorderTitle>
           <BorderContent>
             <BorderPage name="logo-google" size={30} />
             <BorderPage name="logo-facebook" size={30} />
