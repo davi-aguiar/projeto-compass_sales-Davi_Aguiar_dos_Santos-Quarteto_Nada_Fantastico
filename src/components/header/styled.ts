@@ -10,7 +10,7 @@ export const Header = styled.Text`
   font-weight:700;
   font-size: 34px;
   font-family: Roboto-Regular;
-  width: 86px;
+  width: 100%;
   top: 108px;
   left: 14px;
 `;

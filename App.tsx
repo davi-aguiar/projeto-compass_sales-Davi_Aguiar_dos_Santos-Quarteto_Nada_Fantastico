@@ -6,11 +6,12 @@
  */
 
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native'
+import {NavigationContainer} from '@react-navigation/native';
 import Login from './src/screens/Login';
+import SignUp from '@screens/SignUp';
 
-function App(){
- return <Login/>
-};
+function App() {
+  return <SignUp />;
+}
 
-export default App
+export default App;
