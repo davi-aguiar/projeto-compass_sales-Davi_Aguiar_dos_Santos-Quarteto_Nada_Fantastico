@@ -40,29 +40,13 @@ export const OutlineText = styled.Text`
   font-weight: 700;
 `;
 
-export const BorderContent = styled.View`
-  width: 50%;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const BorderTitle = styled.Text`
-  color: black;
-  font-family: Roboto-Regular;
-  width: 65%;
-  height: 20px;
-  align-items: center;
-  left: 40px;
-`;
-
-export const BorderContainer = styled.View`
-  top: 100px;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const HeaderContainer = styled.View`
   width: 100%;
   height: 100px;
+  justify-content: space-between;
+`;
+
+export const HeaderContent = styled.View`
+  justify-content: space-between;
+  flex-direction: column;
 `;

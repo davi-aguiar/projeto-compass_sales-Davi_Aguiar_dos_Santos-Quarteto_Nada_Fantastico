@@ -46,8 +46,8 @@ export const OutlineText = styled.Text`
   text-align: right;
   font-family: Roboto-Regular;
   font-size: 14px;
-  font-weight: 500;
-  margin-right: 10px;
+  font-weight: 700;
+  margin-right: 30px;
 `;
 
 export const BorderContent = styled.View`

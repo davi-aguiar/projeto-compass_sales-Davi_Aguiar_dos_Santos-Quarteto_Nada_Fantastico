@@ -13,6 +13,11 @@ export const Content = styled.View`
 `;
 export const TouchableTexts = styled.TouchableOpacity``;
 
+export const HeaderContent = styled.View`
+  justify-content: space-between;
+  flex-direction: column;
+` 
+
 export const CreateAccountText = styled.Text`
   color: black;
   text-align: center;
@@ -67,3 +72,4 @@ export const HeaderContainer = styled.View`
   width: 100%;
   height: 100px;
 `;
+

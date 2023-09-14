@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import {Input} from '@components/input';
-import {TopPage} from '@components/header';
-import {ButtonPage} from '@components/button';
-import {BorderPage} from '@components/borderContent';
+import { Input } from '@components/input';
+import { TopPage } from '@components/header';
+import { ButtonPage } from '@components/button';
+import { BorderPage } from '@components/borderContent';
+
+import { Controller, useForm } from 'react-hook-form';
 
 import {
   BorderContent,
@@ -15,31 +17,118 @@ import {
   TouchableTexts,
   HeaderContainer,
   OutlineContainer,
+  HeaderContent,
+  CreateAccountText,
 } from './styled';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
+import { AuthNavigatorProps } from '../../routes';
+import { FIREBASE_AUTH } from '../../../FirebaseConfig';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+
+type errorType = { email: string; password: string };
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState('false');
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<errorType>();
+
+  const navigation = useNavigation<AuthNavigatorProps>();
+
+  const auth = FIREBASE_AUTH;
+
+  const signIn = async () => {
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const signUp = async () => {
+  //   try {
+  //     const response = await createUserWithEmailAndPassword(
+  //       auth,
+  //       email,
+  //       password,
+  //     );
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   return (
     <>
-      <HeaderContainer >
-      <TopPage title="Login" />
+      <HeaderContainer>
+        <HeaderContent>
+          <TopPage title="Login" />
+        </HeaderContent>
       </HeaderContainer>
       <Container>
         <Content>
-          <Input label="Email" keyboardType="email-address" />
-          <Input label="Password" secureTextEntry />
-        <OutlineContainer>
-          <TouchableTexts>
-            <OutlineText>
-              Forgot your password?
-              <Ionicons name="arrow-forward-sharp" size={13} color="#ff0000" />
-            </OutlineText>
-          </TouchableTexts>
+          <Controller
+            control={control}
+            name="email"
+            rules={{ required: 'email' }}
+            render={({ field: { onChange } }) => (
+              <Input
+                label="Email"
+                keyboardType="email-address"
+                autoCapitalize="none"
+                onChangeText={onChange}
+                errorMessage={errors.email?.message}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="password"
+            rules={{ required: 'password' }}
+            render={({ field: { onChange } }) => (
+              <Input
+                label="Password"
+                autoCapitalize="none"
+                secureTextEntry
+                onChangeText={onChange}
+                errorMessage={errors.email?.message}
+              />
+            )}
+          />
+
+          <OutlineContainer>
+            <TouchableTexts
+              onPress={() => navigation.navigate('ForgotPassword')}>
+              <OutlineText>
+                Forgot your password?
+                <Ionicons
+                  name="arrow-forward-sharp"
+                  size={13}
+                  color="#ff0000"
+                />
+              </OutlineText>
+            </TouchableTexts>
           </OutlineContainer>
         </Content>
 
-        <ButtonPage title="LOGIN" />
+        <ButtonPage title="LOGIN" onPress={handleSubmit(signIn)} />
+        <TouchableTexts onPress={() => navigation.navigate('SignUp')}>
+          <CreateAccountText>
+            {' '}
+            Don't have an account? Register here
+          </CreateAccountText>
+        </TouchableTexts>
 
         <BorderContainer>
           <BorderTitle> Or sign up with social account</BorderTitle>

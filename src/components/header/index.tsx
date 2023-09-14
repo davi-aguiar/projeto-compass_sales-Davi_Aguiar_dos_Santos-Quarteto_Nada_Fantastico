@@ -9,9 +9,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 
  export function TopPage({title}:Props) {
   return (
-    <BackGround>
+    
       <Header>{title}</Header>
-    </BackGround>
+    
   );
 }
 

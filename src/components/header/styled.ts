@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 export const BackGround = styled.View`
+background-color: blue;
   width: 100%;
   height: 100px;
 `;
