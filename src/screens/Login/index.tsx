@@ -25,12 +25,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { AuthNavigatorProps } from '../../routes';
 import { FIREBASE_AUTH } from '../../../FirebaseConfig';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { Alert } from 'react-native/Libraries/Alert/Alert';
 
-type errorType = { email: string; password: string };
+type FormType = { email: string; password: string };
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -41,33 +39,22 @@ export default function Login() {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<errorType>();
+  } = useForm<FormType>();
 
   const navigation = useNavigation<AuthNavigatorProps>();
 
-  const auth = FIREBASE_AUTH;
-
-  const signIn = async () => {
+  async function SignIn({ email, password }: FormType) {
     try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
+      const response = await signInWithEmailAndPassword(
+        FIREBASE_AUTH,
+        email,
+        password,
+      );
       console.log(response);
     } catch (error) {
       console.log(error);
     }
-  };
-
-  // const signUp = async () => {
-  //   try {
-  //     const response = await createUserWithEmailAndPassword(
-  //       auth,
-  //       email,
-  //       password,
-  //     );
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  }
 
   return (
     <>
@@ -122,7 +109,8 @@ export default function Login() {
           </OutlineContainer>
         </Content>
 
-        <ButtonPage title="LOGIN" onPress={handleSubmit(signIn)} />
+        <ButtonPage title="LOGIN" onPress={handleSubmit(SignIn)} />
+
         <TouchableTexts onPress={() => navigation.navigate('SignUp')}>
           <CreateAccountText>
             {' '}

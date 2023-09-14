@@ -23,13 +23,13 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthNavigatorProps } from 'src/routes';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { auth } from '../../../FirebaseConfig';
+import { FIREBASE_AUTH } from '../../../FirebaseConfig';
 import { Alert } from 'react-native';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
 type FormType = { name: string; email: string; password: string };
 
-export default function Login() {
+export default function SignUp() {
   const navigation = useNavigation<AuthNavigatorProps>();
 
   const {
@@ -40,16 +40,17 @@ export default function Login() {
 
   async function CreateUser({ name, email, password }: FormType) {
     try {
-      if (!email && !password) {
-        Alert.alert('Email and password required');
-      }
-      const user = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(user);
-      if (user && auth.currentUser) {
-        updateProfile(auth.currentUser, {
+      const user = await createUserWithEmailAndPassword(
+        FIREBASE_AUTH,
+        email,
+        password,
+      );
+      if (user.user && FIREBASE_AUTH.currentUser) {
+        await updateProfile(FIREBASE_AUTH.currentUser, {
           displayName: name,
         });
       }
+      console.log(user);
     } catch (error: any) {
       console.log(error);
     }
@@ -74,7 +75,7 @@ export default function Login() {
                 label="Name"
                 autoCapitalize="none"
                 onChangeText={onChange}
-                errorMessage={errors.email?.message}
+                errorMessage={errors.name?.message}
               />
             )}
           />

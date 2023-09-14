@@ -1,14 +1,14 @@
 import React from 'react';
-import {TextProps, View} from 'react-native';
-import {Button, ButtonTitle} from './styled'; // Importe os componentes estilizados
+import { TouchableOpacityProps } from 'react-native';
+import { Button, ButtonTitle } from './styled'; // Importe os componentes estilizados
 
-type buttonProps = TextProps & {
+type buttonProps = TouchableOpacityProps & {
   title: string;
 };
 
-export function ButtonPage({title}: buttonProps) {
+export function ButtonPage({ title, ...rest }: buttonProps) {
   return (
-    <Button>
+    <Button {...rest}>
       <ButtonTitle>{title}</ButtonTitle>
     </Button>
   );
