@@ -6,6 +6,7 @@ import { ButtonPage } from '@components/button';
 import { BorderPage } from '@components/borderContent';
 
 import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 import {
   BorderContent,
@@ -26,17 +27,23 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { FIREBASE_AUTH } from '../../../FirebaseConfig';
 import { Alert } from 'react-native';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { Validations } from '../../utils/validations';
 
 type FormType = { name: string; email: string; password: string };
 
 export default function SignUp() {
+  const [buttonState, setButtonState] = useState(false);
+
   const navigation = useNavigation<AuthNavigatorProps>();
 
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm<FormType>();
+  } = useForm<FormType>({
+    resolver: yupResolver(Validations),
+  });
 
   async function CreateUser({ name, email, password }: FormType) {
     try {
@@ -50,6 +57,7 @@ export default function SignUp() {
           displayName: name,
         });
       }
+      navigation.navigate('Login');
       console.log(user);
     } catch (error: any) {
       console.log(error);
@@ -70,9 +78,12 @@ export default function SignUp() {
             control={control}
             name="name"
             rules={{ required: 'name' }}
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <Input
                 label="Name"
+                formValidation={buttonState}
+                icon
+                value={value}
                 autoCapitalize="none"
                 onChangeText={onChange}
                 errorMessage={errors.name?.message}
@@ -84,11 +95,14 @@ export default function SignUp() {
             control={control}
             name="email"
             rules={{ required: 'email' }}
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <Input
                 label="Email"
                 keyboardType="email-address"
                 autoCapitalize="none"
+                icon
+                value={value}
+                formValidation={buttonState}
                 onChangeText={onChange}
                 errorMessage={errors.email?.message}
               />
@@ -99,10 +113,13 @@ export default function SignUp() {
             control={control}
             name="password"
             rules={{ required: 'password' }}
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <Input
                 label="Password"
                 autoCapitalize="none"
+                icon
+                value={value}
+                formValidation={buttonState}
                 secureTextEntry
                 onChangeText={onChange}
                 errorMessage={errors.password?.message}
@@ -110,7 +127,11 @@ export default function SignUp() {
             )}
           />
           <OutlineContainer>
-            <TouchableTexts onPress={() => navigation.navigate('Login')}>
+            <TouchableTexts
+              onPress={() => (
+                navigation.navigate('Login'),
+                reset({ name: '', email: '', password: '' })
+              )}>
               <OutlineText>
                 Already have an account?
                 <Ionicons
@@ -123,7 +144,11 @@ export default function SignUp() {
           </OutlineContainer>
         </Content>
 
-        <ButtonPage title="SIGN UP" onPress={handleSubmit(CreateUser)} />
+        <ButtonPage
+          title="SIGN UP"
+          onPress={handleSubmit(CreateUser)}
+          onPressIn={() => setButtonState(true)}
+        />
 
         <BorderContainer>
           <BorderTitle> Or sign up with social account</BorderTitle>

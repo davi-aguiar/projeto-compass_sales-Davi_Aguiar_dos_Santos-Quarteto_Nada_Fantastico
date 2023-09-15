@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Input } from '@components/input';
 import { TopPage } from '@components/header';
@@ -21,16 +21,22 @@ import { TouchableTexts } from '@screens/Login/styled';
 import { Controller, useForm } from 'react-hook-form';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../../../FirebaseConfig';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { ValidationsForgotPassword } from '../../utils/validations';
 
 type FormType = { email: string };
 
-export default function Login() {
+export default function ForgotPassword() {
   const navigation = useNavigation<AuthNavigatorProps>();
+
+  const [buttonState, setButtonState] = useState(false);
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormType>();
+  } = useForm<FormType>({
+    resolver: yupResolver(ValidationsForgotPassword),
+  });
 
   async function ForgotPassword({ email }: FormType) {
     try {
@@ -66,10 +72,13 @@ export default function Login() {
             control={control}
             name="email"
             rules={{ required: 'email' }}
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <Input
                 label="Email"
                 keyboardType="email-address"
+                icon
+                value={value}
+                formValidation={buttonState}
                 autoCapitalize="none"
                 onChangeText={onChange}
                 errorMessage={errors.email?.message}

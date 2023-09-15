@@ -26,18 +26,15 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthNavigatorProps } from '../../routes';
 import { FIREBASE_AUTH } from '../../../FirebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { Alert } from 'react-native/Libraries/Alert/Alert';
+import Toast from 'react-native-root-toast';
 
 type FormType = { email: string; password: string };
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState('false');
-
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormType>();
 
@@ -50,9 +47,17 @@ export default function Login() {
         email,
         password,
       );
+      reset({ email: '', password: '' });
       console.log(response);
+      Toast.show('Succesful', {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.TOP,
+      });
     } catch (error) {
-      console.log(error);
+      Toast.show('Try again', {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.TOP,
+      });
     }
   }
 
@@ -96,7 +101,10 @@ export default function Login() {
 
           <OutlineContainer>
             <TouchableTexts
-              onPress={() => navigation.navigate('ForgotPassword')}>
+              onPress={() => (
+                navigation.navigate('ForgotPassword'),
+                reset({ email: '', password: '' })
+              )}>
               <OutlineText>
                 Forgot your password?
                 <Ionicons
