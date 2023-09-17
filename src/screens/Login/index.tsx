@@ -23,7 +23,7 @@ import {
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-import { AuthNavigatorProps } from '../../routes';
+import { AuthNavigatorProps } from '../../routes/validationroutes';
 import { FIREBASE_AUTH } from '../../../FirebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import Toast from 'react-native-root-toast';

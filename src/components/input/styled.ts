@@ -17,10 +17,11 @@ export const HoshiInput = styled(Hoshi).attrs(() => ({
   inputPadding: 4,
   borderHeight: 0,
   labelStyle: {
-    color: 'red',
+    fontSize: 16,
   },
   inputStyle: {
-    color: 'green',
+    fontSize: 14,
+    alignItems: 'baseline',
   },
 }))`
   border-color: white;

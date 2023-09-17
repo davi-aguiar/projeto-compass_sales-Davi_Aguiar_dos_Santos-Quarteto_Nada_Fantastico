@@ -14,7 +14,7 @@ import {
 } from './styled';
 
 import { useNavigation } from '@react-navigation/native';
-import { AuthNavigatorProps } from '../../../src/routes';
+import { AuthNavigatorProps } from '../../routes/validationroutes';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TouchableTexts } from '@screens/Login/styled';
@@ -23,6 +23,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../../../FirebaseConfig';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ValidationsForgotPassword } from '../../utils/validations';
+import Toast from 'react-native-root-toast';
 
 type FormType = { email: string };
 
@@ -44,8 +45,16 @@ export default function ForgotPassword() {
         FIREBASE_AUTH,
         email,
       );
+      Toast.show('Email send', {
+        duration: Toast.durations.SHORT,
+        position: Toast.positions.CENTER,
+      });
     } catch (error) {
-      console.log(error);
+      Toast.show('Ocorreu um erro ao enviar o email de redefinição de senha', {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.CENTER,
+      });
+      console.error(error);
     }
   }
 

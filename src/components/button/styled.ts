@@ -20,3 +20,14 @@ export const ButtonTitle = styled.Text`
   line-height: 20px;
   font-family: Roboto-Regular;
 `;
+
+export const CustomButton = styled(Button)`
+  background-color: #db3022;
+  width: 160px;
+  height: 36px;
+  left: 10px;
+`;
+
+export const CustomButtonTitle = styled(ButtonTitle)`
+  color: white;
+`;

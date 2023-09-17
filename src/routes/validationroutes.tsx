@@ -3,6 +3,7 @@ import React from 'react';
 import Login from '@screens/Login';
 import SignUp from '@screens/SignUp';
 import ForgotPassword from '@screens/ForgotPassword';
+// import HomePage from '@screens/HomePage';
 
 import { NavigationContainer } from '@react-navigation/native';
 import {
@@ -10,12 +11,15 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import { View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const { Screen, Navigator } = createNativeStackNavigator();
+
 type Screens = {
   ForgotPassword: undefined;
   Login: undefined;
   SignUp: undefined;
+  // HomePage: undefined;
 };
 export type AuthNavigatorProps = NativeStackNavigationProp<Screens>;
 
@@ -27,6 +31,7 @@ export default function StackComponent() {
           <Screen name="SignUp" component={SignUp} />
           <Screen name="Login" component={Login} />
           <Screen name="ForgotPassword" component={ForgotPassword} />
+          {/* <Screen name="HomePage" component={HomePage} /> */}
         </Navigator>
       </NavigationContainer>
     </View>

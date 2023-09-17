@@ -8,6 +8,8 @@ import { BorderPage } from '@components/borderContent';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
+import SvgSign from '../../assets/icons/inactive.svg';
+
 import {
   BorderContent,
   BorderTitle,
@@ -21,11 +23,10 @@ import {
 } from './styled';
 
 import { useNavigation } from '@react-navigation/native';
-import { AuthNavigatorProps } from 'src/routes';
+import { AuthNavigatorProps } from '../../routes/validationroutes';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { FIREBASE_AUTH } from '../../../FirebaseConfig';
-import { Alert } from 'react-native';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Validations } from '../../utils/validations';
 
@@ -154,6 +155,7 @@ export default function SignUp() {
           <BorderTitle> Or sign up with social account</BorderTitle>
           <BorderContent>
             <BorderPage name="logo-google" size={30} />
+
             <BorderPage name="logo-facebook" size={30} />
           </BorderContent>
         </BorderContainer>

@@ -1,7 +1,7 @@
-import { HoshiProps } from 'react-native-textinput-effects';
-import { InputContainer, HoshiInput, InputIcon } from './styled';
 import React from 'react';
 import { TextInputProps } from 'react-native';
+import { HoshiProps } from 'react-native-textinput-effects';
+import { InputContainer, HoshiInput, InputIcon } from './styled';
 
 type HoshiTypes = HoshiProps &
   TextInputProps & {
@@ -19,20 +19,18 @@ export function Input({
   formValidation,
   ...rest
 }: HoshiTypes) {
+  const showErrorIcon = !!errorMessage;
+  const showSuccessIcon = !showErrorIcon && value && formValidation;
+
+  const iconSource = showErrorIcon
+    ? require('../../assets/icons/outline-close-24px.png')
+    : showSuccessIcon
+    ? require('../../assets/icons/outline-check-24px.png')
+    : null;
+
   return (
     <InputContainer>
-      {icon && !errorMessage && value && formValidation ? (
-        <InputIcon
-          source={require('../../assets/icons/outline-check-24px.png')}
-        />
-      ) : (
-        icon &&
-        errorMessage && (
-          <InputIcon
-            source={require('../../assets/icons/outline-close-24px.png')}
-          />
-        )
-      )}
+      {icon && iconSource && <InputIcon source={iconSource} />}
       <HoshiInput label={label} {...rest} />
     </InputContainer>
   );
