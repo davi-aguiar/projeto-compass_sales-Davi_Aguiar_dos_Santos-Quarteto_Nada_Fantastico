@@ -17,14 +17,16 @@ import {
   ViewAll,
 } from './styled';
 import CardList from '@components/list';
+import { useAuth } from '../../context/AuthContext';
 
 export default function Home() {
+  const { user } = useAuth();
   return (
     <Screen>
       <BackgroundImage
         source={require('../../assets/images/home-background-img.png')}
         resizeMode="cover">
-        <TopText>Hello, User!</TopText>
+        <TopText>Hello, {user?.displayName}</TopText>
         <TopTextContainer>
           <ContainerCompanyName>Compass Sales</ContainerCompanyName>
         </TopTextContainer>
