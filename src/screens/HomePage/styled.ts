@@ -16,8 +16,7 @@ export const TopText = styled.Text`
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  margin-left: 20px;
-  top: 85px;
+  margin-left: 30px;
 `;
 
 export const ContainerCompanyName = styled.Text`
@@ -30,6 +29,7 @@ export const ContainerCompanyName = styled.Text`
   font-style: normal;
   font-weight: 900;
   margin-left: 20px;
+  margin-top: 10px;
 `;
 
 export const Screen = styled.ScrollView`
@@ -74,4 +74,26 @@ export const SubtitleText = styled.Text`
   font-size: 14px;
   font-family: 'Roboto-light';
   left: 8px;
+`;
+
+export const LogoutContainer = styled.View`
+  width: auto;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+export const ButtonLogout = styled.TouchableOpacity`
+  width: 50px;
+  align-items: center;
+  height: 50px;
+  top: 2px;
+`;
+
+export const ContainerTOP = styled.View`
+  font-family: 'Roboto-light';
+  width: auto;
+  height: 50px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 `;

@@ -6,9 +6,12 @@ import { FlatList } from 'react-native';
 import {
   BackgroundImage,
   ButtomContainer,
+  ButtonLogout,
   ContainerCompanyName,
   ContainerSalesItens,
+  ContainerTOP,
   ContainerTexts,
+  LogoutContainer,
   SalesText,
   Screen,
   SubtitleText,
@@ -17,16 +20,35 @@ import {
   ViewAll,
 } from './styled';
 import CardList from '@components/list';
-import { useAuth } from '../../context/AuthContext';
+import { UserHook } from '../../hooks/userReturn';
+import Feather from 'react-native-vector-icons/Feather';
+import { getAuth, signOut } from 'firebase/auth';
+
+const handleLogout = async () => {
+  try {
+    const auth = getAuth();
+    await signOut(auth);
+  } catch (error) {
+    console.error('Erro ao fazer logout:', error);
+  }
+};
 
 export default function Home() {
-  const { user } = useAuth();
+  const user = UserHook();
   return (
     <Screen>
       <BackgroundImage
         source={require('../../assets/images/home-background-img.png')}
         resizeMode="cover">
-        <TopText>Hello, {user?.displayName}</TopText>
+        <ContainerTOP>
+          <TopText>Hello, {user?.displayName}</TopText>
+          <LogoutContainer>
+            <ButtonLogout onPress={handleLogout}>
+              <Feather name="log-out" size={24} color="white" />
+            </ButtonLogout>
+          </LogoutContainer>
+        </ContainerTOP>
+
         <TopTextContainer>
           <ContainerCompanyName>Compass Sales</ContainerCompanyName>
         </TopTextContainer>

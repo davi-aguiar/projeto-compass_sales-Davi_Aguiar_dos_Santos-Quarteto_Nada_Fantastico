@@ -2,9 +2,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface User {
-  id: number;
   displayName: string;
-  email: string;
 }
 
 interface AuthContextType {
@@ -30,10 +28,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
 export function useAuth() {
   const context = useContext(AuthContext);
-
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
 
   return context;
 }

@@ -1,25 +1,13 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-
+import React from 'react';
 import { StatusBar } from 'react-native';
-import Home from '@screens/HomePage';
-import Routes from './src/routes/home';
-import { User, onAuthStateChanged } from 'firebase/auth';
-import { FIREBASE_AUTH } from './FirebaseConfig';
 import StackComponent from './src/routes/validationroutes';
-import Login from '@screens/Login';
 import RouteHome from './src/routes/home';
 import { AuthProvider } from './src/context/AuthContext';
 
+import { UserHook } from './src/hooks/userReturn';
+
 export default function App() {
-  const [user, setUser] = useState<User | null>(null);
-
-  useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, user => {
-      console.log('user', user);
-      setUser(user);
-    });
-  }, []);
-
+  const user = UserHook();
   return (
     <>
       <AuthProvider>
