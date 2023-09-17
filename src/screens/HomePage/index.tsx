@@ -11,13 +11,14 @@ import {
   ContainerTexts,
   SalesText,
   Screen,
+  SubtitleText,
   TopText,
   TopTextContainer,
   ViewAll,
 } from './styled';
 import CardList from '@components/list';
 
-export function Home() {
+export default function Home() {
   return (
     <Screen>
       <BackgroundImage
@@ -41,7 +42,7 @@ export function Home() {
           <ViewAll> View all</ViewAll>
         </ContainerTexts>
       </ContainerSalesItens>
-
+      <SubtitleText> You’ve never seen it before! </SubtitleText>
       <FlatList
         data={[1, 2, 3, 4, 5, 6]}
         keyExtractor={item => String(item)}

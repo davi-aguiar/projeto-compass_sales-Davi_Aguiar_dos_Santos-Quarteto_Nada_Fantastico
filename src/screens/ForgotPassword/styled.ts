@@ -16,7 +16,7 @@ export const TouchableTexts = styled.TouchableOpacity``;
 export const CreateAccountText = styled.Text`
   color: black;
   text-align: center;
-  font-family: Roboto-Regular;
+  font-family: 'Roboto-Regular';
   font-size: 14px;
   font-weight: 700;
   margin-right: 30px;
@@ -35,7 +35,7 @@ export const OutlineContainer = styled.View`
 export const OutlineText = styled.Text`
   color: black;
   text-align: left;
-  font-family: Roboto-Regular;
+  font-family: 'Roboto-Regular';
   font-size: 14px;
   font-weight: 700;
 `;

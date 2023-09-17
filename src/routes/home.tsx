@@ -2,13 +2,13 @@ import React from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home } from '@screens/HomePage';
+import Home from '../screens/HomePage';
 
 import Feather from 'react-native-vector-icons/Feather';
 
 const { Screen, Navigator } = createBottomTabNavigator();
 
-export default function Routes() {
+export default function RouteHome() {
   return (
     <NavigationContainer>
       <Navigator

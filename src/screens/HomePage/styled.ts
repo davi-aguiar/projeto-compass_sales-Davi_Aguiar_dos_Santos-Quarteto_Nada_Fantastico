@@ -64,9 +64,14 @@ export const SalesText = styled.Text`
 
 export const ViewAll = styled.Text`
   color: black;
-
   font-family: 'Roboto-Regular';
   font-size: 11px;
   font-weight: 400;
   right: 20px;
+`;
+
+export const SubtitleText = styled.Text`
+  font-size: 14px;
+  font-family: 'Roboto-light';
+  left: 8px;
 `;
