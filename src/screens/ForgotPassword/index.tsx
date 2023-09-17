@@ -45,16 +45,18 @@ export default function ForgotPassword() {
         FIREBASE_AUTH,
         email,
       );
-      Toast.show('Email send', {
+      Toast.show('Email successfully sent', {
         duration: Toast.durations.SHORT,
         position: Toast.positions.CENTER,
       });
     } catch (error) {
-      Toast.show('Ocorreu um erro ao enviar o email de redefinição de senha', {
+      console.error('Error:', error);
+      const errorMessage = error.message || 'Try Again! Email invalid';
+
+      Toast.show(errorMessage, {
         duration: Toast.durations.LONG,
         position: Toast.positions.CENTER,
       });
-      console.error(error);
     }
   }
 

@@ -86,7 +86,7 @@ export const ButtonLogout = styled.TouchableOpacity`
   width: 50px;
   align-items: center;
   height: 50px;
-  top: 2px;
+  top: 10px;
 `;
 
 export const ContainerTOP = styled.View`
