@@ -34,7 +34,7 @@ type FormType = { name: string; email: string; password: string };
 
 export default function SignUp() {
   const [buttonState, setButtonState] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(false);
   const navigation = useNavigation<AuthNavigatorProps>();
 
   const {
@@ -48,6 +48,7 @@ export default function SignUp() {
 
   async function CreateUser({ name, email, password }: FormType) {
     try {
+      setIsLoading(true);
       const user = await createUserWithEmailAndPassword(
         FIREBASE_AUTH,
         email,
@@ -59,7 +60,7 @@ export default function SignUp() {
         });
       }
       navigation.navigate('Login');
-      console.log(user);
+      setIsLoading(false);
     } catch (error: any) {
       console.log(error);
     }

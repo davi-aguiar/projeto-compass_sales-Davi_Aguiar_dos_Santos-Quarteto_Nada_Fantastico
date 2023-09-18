@@ -21,7 +21,7 @@ export const HeaderContent = styled.View`
 export const CreateAccountText = styled.Text`
   color: black;
   text-align: center;
-  font-family: Roboto-Regular;
+  font-family: Roboto-light;
   font-size: 14px;
   font-weight: 700;
   margin-right: 30px;
@@ -40,7 +40,7 @@ export const OutlineContainer = styled.View`
 export const OutlineText = styled.Text`
   color: black;
   text-align: right;
-  font-family: Roboto-Regular;
+  font-family: Roboto-Light;
   font-size: 14px;
   font-weight: 700;
   margin-right: 30px;
@@ -55,11 +55,12 @@ export const BorderContent = styled.View`
 
 export const BorderTitle = styled.Text`
   color: black;
-  font-family: Roboto-Regular;
+  font-family: Roboto-Bold;
   width: 65%;
   height: 20px;
   align-items: center;
   left: 40px;
+  margin-bottom: 10px;
 `;
 
 export const BorderContainer = styled.View`

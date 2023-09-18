@@ -49,9 +49,8 @@ export default function ForgotPassword() {
         duration: Toast.durations.SHORT,
         position: Toast.positions.CENTER,
       });
-    } catch (error) {
-      console.error('Error:', error);
-      const errorMessage = error.message || 'Try Again! Email invalid';
+    } catch (error: any) {
+      const errorMessage = 'Try Again! Email invalid' || error.message;
 
       Toast.show(errorMessage, {
         duration: Toast.durations.LONG,
