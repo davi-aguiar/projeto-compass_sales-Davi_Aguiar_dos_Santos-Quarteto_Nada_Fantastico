@@ -1,48 +1,67 @@
-# Getting Started
+# Compass Sales
 
 This is the project for an ecommerce (Compass_Sales) proposed for week 8 of the Compass.Uol scholarship program. The first part of the project aimed to create 3 screens for implementing authentication, creation and recovery of users
 
-## Techonologies
+## Prerequisites
 
-1. React Native
-2. TypeScript
-3. Styled Component
-4. React Hook Form
-5. Firebase
-6. React Navigation
-7. Hoshi
-8. Feather and IonIcons
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/) ou [Yarn](https://yarnpkg.com/)
+- [React Native CLI](https://reactnative.dev/docs/environment-setup)
+- [Android Studio]
 
-## Step 1: Installation and Running
+## Instalação
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+Siga as etapas abaixo para configurar e executar o projeto:
 
-To start Metro, run the following command from the _root_ of your React Native project:
+1. Clone este repositório:
 
-```bash
-# using npm
-npm start
+   ```shell
+   git clone https://github.com/davi-aguiar/projeto-compass_sales-Davi_Aguiar_dos_Santos-Quarteto_Nada_Fantastico.git
 
-# OR using Yarn
+   ```
+
+2. Install the dependencies
+
+   ```shell
+   npm install
+   ```
+
+```shell
+yarn install
+```
+
+## Android Studio
+
+Make sure you have the Android environment properly configured with Android Studio if you plan to run the project on Android.
+You can follow the instructions at the following link: https://reactnative.dev/docs/environment-setup
+
+## Start Metro in the terminal
+
+```shell
 yarn start
 ```
 
-##
+```shell
+npm start
+```
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## To Execute on Android Devices
 
-### For Android
-
-```bash
-# using npm
+```shell
 npm run android
+```
 
-# OR using Yarn
+```shell
 yarn android
 ```
 
-# Or using the terminal
+### Techonologies Used
 
-npm run android
-
-yarn android
+React Native
+TypeScript
+Styled Component
+React Hook Form
+Firebase
+React Navigation
+Hoshi
+Feather and IonIcons
