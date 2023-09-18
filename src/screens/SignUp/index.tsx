@@ -8,8 +8,6 @@ import { BorderPage } from '@components/borderContent';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import SvgSign from '../../assets/icons/inactive.svg';
-
 import {
   BorderContent,
   BorderTitle,
@@ -29,13 +27,15 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { FIREBASE_AUTH } from '../../../FirebaseConfig';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Validations } from '../../utils/validations';
+import Toast from 'react-native-root-toast';
 
 type FormType = { name: string; email: string; password: string };
 
 export default function SignUp() {
   const [buttonState, setButtonState] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation<AuthNavigatorProps>();
+  const auth = FIREBASE_AUTH;
 
   const {
     control,
@@ -48,21 +48,34 @@ export default function SignUp() {
 
   async function CreateUser({ name, email, password }: FormType) {
     try {
-      setIsLoading(true);
+      setLoading(true);
+      if (!email && !password) {
+        Toast.show('Email and Password missing', {
+          duration: Toast.durations.SHORT,
+          position: Toast.positions.CENTER,
+        });
+      }
       const user = await createUserWithEmailAndPassword(
         FIREBASE_AUTH,
         email,
         password,
       );
+
       if (user.user && FIREBASE_AUTH.currentUser) {
         await updateProfile(FIREBASE_AUTH.currentUser, {
           displayName: name,
         });
       }
+
+      auth.signOut();
       navigation.navigate('Login');
-      setIsLoading(false);
     } catch (error: any) {
-      console.log(error);
+      Toast.show('Something went wrong, check the inputs', {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.TOP,
+      });
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -154,6 +167,7 @@ export default function SignUp() {
 
         <BorderContainer>
           <BorderTitle> Or sign up with social account</BorderTitle>
+
           <BorderContent>
             <BorderPage name="logo-google" size={30} />
 

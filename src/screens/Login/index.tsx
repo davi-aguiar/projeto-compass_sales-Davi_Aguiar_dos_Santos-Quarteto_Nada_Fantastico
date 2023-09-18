@@ -48,13 +48,8 @@ export default function Login() {
         password,
       );
       reset({ email: '', password: '' });
-      console.log(response);
-      Toast.show('Succesful', {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
-      });
     } catch (error) {
-      Toast.show('Try again', {
+      Toast.show('Something went wrong, check the inputs', {
         duration: Toast.durations.LONG,
         position: Toast.positions.TOP,
       });
