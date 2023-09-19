@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import { Input } from '@components/input';
 import { TopPage } from '@components/header';
@@ -22,26 +23,34 @@ import {
 } from './styled';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
 import { AuthNavigatorProps } from '../../routes/validationroutes';
+
 import { FIREBASE_AUTH } from '../../../FirebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import Toast from 'react-native-root-toast';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import { ValidationLogin } from '../../utils/validations';
+import { ToastAndroid } from 'react-native';
 
 type FormType = { email: string; password: string };
 
-export default function Login() {
+export function Login() {
+  const [buttonState, setButtonState] = useState(false);
+  const [loading, setLoading] = useState(false);
   const {
     control,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormType>();
+  } = useForm<FormType>({
+    resolver: yupResolver(ValidationLogin),
+  });
 
   const navigation = useNavigation<AuthNavigatorProps>();
 
   async function SignIn({ email, password }: FormType) {
     try {
+      setLoading(true);
       const response = await signInWithEmailAndPassword(
         FIREBASE_AUTH,
         email,
@@ -49,10 +58,15 @@ export default function Login() {
       );
       reset({ email: '', password: '' });
     } catch (error) {
-      Toast.show('Something went wrong, check the inputs', {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
-      });
+      ToastAndroid.showWithGravityAndOffset(
+        'Something went wrong. Check the inputs',
+        ToastAndroid.LONG,
+        ToastAndroid.TOP,
+        0,
+        0,
+      );
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -69,10 +83,13 @@ export default function Login() {
             control={control}
             name="email"
             rules={{ required: 'email' }}
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <Input
                 label="Email"
                 keyboardType="email-address"
+                formValidation={buttonState}
+                icon
+                value={value}
                 autoCapitalize="none"
                 onChangeText={onChange}
                 errorMessage={errors.email?.message}
@@ -83,13 +100,16 @@ export default function Login() {
             control={control}
             name="password"
             rules={{ required: 'password' }}
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <Input
                 label="Password"
+                formValidation={buttonState}
+                icon
+                value={value}
                 autoCapitalize="none"
                 secureTextEntry
                 onChangeText={onChange}
-                errorMessage={errors.email?.message}
+                errorMessage={errors.password?.message}
               />
             )}
           />

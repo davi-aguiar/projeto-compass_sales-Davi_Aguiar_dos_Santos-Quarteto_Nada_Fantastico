@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Login from '@screens/Login';
-import SignUp from '@screens/SignUp';
-import ForgotPassword from '@screens/ForgotPassword';
+import { Login } from '@screens/Login';
+import { SignUp } from '@screens/SignUp';
+import { ForgotPassword } from '@screens/ForgotPassword';
 
 import { NavigationContainer } from '@react-navigation/native';
 import {
@@ -20,7 +20,7 @@ type Screens = {
 };
 export type AuthNavigatorProps = NativeStackNavigationProp<Screens>;
 
-export default function StackComponent() {
+export function StackComponent() {
   return (
     <View style={{ flex: 1 }}>
       <NavigationContainer>

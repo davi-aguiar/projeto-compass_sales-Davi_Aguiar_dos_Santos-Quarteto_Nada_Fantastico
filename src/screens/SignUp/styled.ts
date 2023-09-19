@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   width: 100%;
   height: 812px;
-  
 `;
 
 export const Content = styled.View`
@@ -48,6 +47,7 @@ export const OutlineText = styled.Text`
   font-size: 14px;
   font-weight: 700;
   margin-right: 30px;
+  bottom: 14px;
 `;
 
 export const BorderContent = styled.View`

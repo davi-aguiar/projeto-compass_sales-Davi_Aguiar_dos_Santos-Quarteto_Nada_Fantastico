@@ -19,7 +19,7 @@ import {
   TopTextContainer,
   ViewAll,
 } from './styled';
-import CardList from '@components/list';
+import { CardList } from '@components/list';
 import { UserHook } from '../../hooks/userReturn';
 import Feather from 'react-native-vector-icons/Feather';
 import { getAuth, signOut } from 'firebase/auth';
@@ -33,7 +33,7 @@ const handleLogout = async () => {
   }
 };
 
-export default function Home() {
+export function Home() {
   const user = UserHook();
   return (
     <Screen>

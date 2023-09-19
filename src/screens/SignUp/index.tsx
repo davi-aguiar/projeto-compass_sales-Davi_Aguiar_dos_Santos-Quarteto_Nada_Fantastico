@@ -24,19 +24,20 @@ import { useNavigation } from '@react-navigation/native';
 import { AuthNavigatorProps } from '../../routes/validationroutes';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import { FIREBASE_AUTH } from '../../../FirebaseConfig';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { Validations } from '../../utils/validations';
-import Toast from 'react-native-root-toast';
+
+import { Alert, ToastAndroid } from 'react-native';
 
 type FormType = { name: string; email: string; password: string };
 
-export default function SignUp() {
+export function SignUp() {
   const [buttonState, setButtonState] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation<AuthNavigatorProps>();
   const auth = FIREBASE_AUTH;
-
   const {
     control,
     handleSubmit,
@@ -49,31 +50,36 @@ export default function SignUp() {
   async function CreateUser({ name, email, password }: FormType) {
     try {
       setLoading(true);
-      if (!email && !password) {
-        Toast.show('Email and Password missing', {
-          duration: Toast.durations.SHORT,
-          position: Toast.positions.CENTER,
-        });
-      }
-      const user = await createUserWithEmailAndPassword(
-        FIREBASE_AUTH,
+
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
         email,
         password,
       );
 
-      if (user.user && FIREBASE_AUTH.currentUser) {
-        await updateProfile(FIREBASE_AUTH.currentUser, {
-          displayName: name,
-        });
+      const user = userCredential.user;
+
+      if (user) {
+        await updateProfile(user, { displayName: name });
       }
 
+      ToastAndroid.showWithGravityAndOffset(
+        'User Created',
+        ToastAndroid.LONG,
+        ToastAndroid.TOP,
+        0,
+        0,
+      );
       auth.signOut();
       navigation.navigate('Login');
-    } catch (error: any) {
-      Toast.show('Something went wrong, check the inputs', {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.TOP,
-      });
+    } catch (error) {
+      ToastAndroid.showWithGravityAndOffset(
+        'Something went wrong. Check the inputs',
+        ToastAndroid.LONG,
+        ToastAndroid.TOP,
+        0,
+        0,
+      );
     } finally {
       setLoading(false);
     }
@@ -92,7 +98,7 @@ export default function SignUp() {
           <Controller
             control={control}
             name="name"
-            rules={{ required: 'name' }}
+            rules={{ required: 'Name' }}
             render={({ field: { onChange, value } }) => (
               <Input
                 label="Name"
@@ -105,7 +111,6 @@ export default function SignUp() {
               />
             )}
           />
-
           <Controller
             control={control}
             name="email"
@@ -123,7 +128,6 @@ export default function SignUp() {
               />
             )}
           />
-
           <Controller
             control={control}
             name="password"
@@ -158,19 +162,15 @@ export default function SignUp() {
             </TouchableTexts>
           </OutlineContainer>
         </Content>
-
         <ButtonPage
           title="SIGN UP"
           onPress={handleSubmit(CreateUser)}
           onPressIn={() => setButtonState(true)}
         />
-
         <BorderContainer>
           <BorderTitle> Or sign up with social account</BorderTitle>
-
           <BorderContent>
             <BorderPage name="logo-google" size={30} />
-
             <BorderPage name="logo-facebook" size={30} />
           </BorderContent>
         </BorderContainer>

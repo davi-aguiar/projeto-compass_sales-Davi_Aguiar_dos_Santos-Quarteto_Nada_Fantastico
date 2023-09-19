@@ -24,10 +24,11 @@ import { FIREBASE_AUTH } from '../../../FirebaseConfig';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ValidationsForgotPassword } from '../../utils/validations';
 import Toast from 'react-native-root-toast';
+import { ToastAndroid } from 'react-native';
 
 type FormType = { email: string };
 
-export default function ForgotPassword() {
+export function ForgotPassword() {
   const navigation = useNavigation<AuthNavigatorProps>();
 
   const [buttonState, setButtonState] = useState(false);
@@ -45,20 +46,23 @@ export default function ForgotPassword() {
         FIREBASE_AUTH,
         email,
       );
-      Toast.show('Email successfully sent', {
-        duration: Toast.durations.SHORT,
-        position: Toast.positions.CENTER,
-      });
+      ToastAndroid.showWithGravityAndOffset(
+        'Check your box mail',
+        ToastAndroid.LONG,
+        ToastAndroid.TOP,
+        0,
+        0,
+      );
     } catch (error: any) {
-      const errorMessage = 'Try Again! Email invalid' || error.message;
-
-      Toast.show(errorMessage, {
-        duration: Toast.durations.LONG,
-        position: Toast.positions.CENTER,
-      });
+      ToastAndroid.showWithGravityAndOffset(
+        'Something went wrong. Check the inputs',
+        ToastAndroid.LONG,
+        ToastAndroid.SHORT,
+        0,
+        0,
+      );
     }
   }
-
   return (
     <>
       <HeaderContainer>
@@ -96,7 +100,6 @@ export default function ForgotPassword() {
             )}
           />
         </Content>
-
         <ButtonPage title="SEND" onPress={handleSubmit(ForgotPassword)} />
       </Container>
     </>

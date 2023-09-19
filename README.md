@@ -9,11 +9,11 @@ This is the project for an ecommerce (Compass_Sales) proposed for week 8 of the 
 - [React Native CLI](https://reactnative.dev/docs/environment-setup)
 - [Android Studio]
 
-## Instalação
+## Instalation
 
-Siga as etapas abaixo para configurar e executar o projeto:
+Follow this steps:
 
-1. Clone este repositório:
+1. Clone this repository:
 
    ```shell
    git clone https://github.com/davi-aguiar/projeto-compass_sales-Davi_Aguiar_dos_Santos-Quarteto_Nada_Fantastico.git
@@ -26,9 +26,9 @@ Siga as etapas abaixo para configurar e executar o projeto:
    npm install
    ```
 
-```shell
-yarn install
-```
+   ```shell
+   yarn install
+   ```
 
 ## Android Studio
 

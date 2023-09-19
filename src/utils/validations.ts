@@ -6,7 +6,10 @@ export const Validations = yup.object({
     .string()
     .required('Please enter a valid email')
     .email('Format invalid!'),
-  password: yup.string().required('Please').min(4, 'Format invalid!'),
+  password: yup
+    .string()
+    .required('Please enter a 6-digit password')
+    .min(6, 'At least 6 digits'),
 });
 
 export const ValidationsForgotPassword = yup.object({
@@ -14,4 +17,15 @@ export const ValidationsForgotPassword = yup.object({
     .string()
     .required('Please enter a valid email')
     .email('Format invalid!'),
+});
+
+export const ValidationLogin = yup.object({
+  email: yup
+    .string()
+    .required('Please enter a valid email')
+    .email('Format invalid!'),
+  password: yup
+    .string()
+    .required('Please enter a 6-digit password')
+    .min(6, 'Please enter a valid password!'),
 });

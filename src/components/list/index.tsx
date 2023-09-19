@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, ContainerImage } from './styled';
 
-export default function CardList() {
+export function CardList() {
   return (
     <Container>
       <ContainerImage

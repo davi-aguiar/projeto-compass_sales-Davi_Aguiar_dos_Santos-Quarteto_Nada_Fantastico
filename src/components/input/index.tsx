@@ -1,7 +1,13 @@
 import React from 'react';
 import { TextInputProps } from 'react-native';
 import { HoshiProps } from 'react-native-textinput-effects';
-import { InputContainer, HoshiInput, InputIcon } from './styled';
+import {
+  InputContainer,
+  HoshiInput,
+  InputIcon,
+  ErrorMessage,
+  ErrorMessageContainer,
+} from './styled';
 
 type HoshiTypes = HoshiProps &
   TextInputProps & {
@@ -32,6 +38,9 @@ export function Input({
     <InputContainer>
       {icon && iconSource && <InputIcon source={iconSource} />}
       <HoshiInput label={label} {...rest} />
+      <ErrorMessageContainer>
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      </ErrorMessageContainer>
     </InputContainer>
   );
 }
